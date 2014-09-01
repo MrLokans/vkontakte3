@@ -16,7 +16,7 @@ python setup.py install
 # usage
 
 Package API is fully compatible with its predecessor, 
-so check it (here)[https://pypi.python.org/pypi/vkontakte].
+so you can check it [here](https://pypi.python.org/pypi/vkontakte).
 
 # bugs
 
