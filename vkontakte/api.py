@@ -9,21 +9,25 @@ import urllib.request
 from hashlib import md5
 from functools import partial
 
-
 API_URL = 'http://api.vk.com/api.php'
 SECURE_API_URL = 'https://api.vkontakte.ru/method/'
 DEFAULT_TIMEOUT = 1
 REQUEST_ENCODING = 'utf-8'
+
+# See full list of VK API methods here:
+# http://vk.com/developers.php?o=-1&p=%D0%A0%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B_API&s=0
+# http://vk.com/developers.php?o=-1&p=%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D0%BE%D0%B2_API&s=0
 COMPLEX_METHODS = ['secure', 'ads', 'messages', 'likes', 'friends',
-    'groups', 'photos', 'wall', 'newsfeed', 'notifications', 'audio',
-    'video', 'docs', 'places', 'storage', 'notes', 'pages',
-    'activity', 'offers', 'questions', 'subscriptions',
-    'users', 'status', 'polls', 'account', 'auth', 'stats']
+                   'groups', 'photos', 'wall', 'newsfeed', 'notifications', 'audio',
+                   'video', 'docs', 'places', 'storage', 'notes', 'pages',
+                   'activity', 'offers', 'questions', 'subscriptions',
+                   'users', 'status', 'polls', 'account', 'auth', 'stats']
 
 
 class VKError(Exception):
     __slots__ = ["error"]
     def __init__(self, error_data):
+        self.error = error_data
         Exception.__init__(self, str(self))
 
     @property
@@ -138,8 +142,6 @@ class _API:
         else:
             res = res.read()
         return res
-
-
 
 class API(_API):
     def get(self, method, timeout=DEFAULT_TIMEOUT, **kwargs):
