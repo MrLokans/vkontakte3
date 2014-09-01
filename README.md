@@ -13,11 +13,11 @@ cd vkontakte3
 python setup.py install
 ```
 
-# usage
+## usage
 
 Package API is fully compatible with its predecessor, 
 so you can check it [here](https://pypi.python.org/pypi/vkontakte).
 
-# bugs
+## bugs
 
 Send me your bug reports/fixes to **budnyjj@pirates.by**.
