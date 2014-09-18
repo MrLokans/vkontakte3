@@ -6,6 +6,7 @@ import time
 import json
 import urllib.parse
 import urllib.request
+import urllib.error
 from hashlib import md5
 from functools import partial
 
@@ -125,14 +126,14 @@ class _API:
         data = urllib.parse.urlencode(params).encode(REQUEST_ENCODING)
         try: 
             res = urllib.request.urlopen(url=url, data=data, timeout=timeout)
-        except URLError as e:
+        except urllib.error.URLError as e:
             raise VKError({
                 'error_code': 404,
                 'error_msg': e.reason,
                 'request_params': kwargs,
             })
             res = ""
-        except HTTPError as e:
+        except urllib.error.HTTPError as e:
             raise VKError({
                 'error_code': e.code,
                 'error_msg': 'HTTP error',
